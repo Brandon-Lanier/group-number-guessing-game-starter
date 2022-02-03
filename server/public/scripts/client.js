@@ -1,8 +1,8 @@
 $(document).ready(handleReady);
 
-let allGuesses = [];
+
 let counter = 0;
-const randomNumber = Math.floor(Math.random() * ( 26 - 1 ) + 1); 
+
 console.log('random num =', randomNumber);
 
 
@@ -13,36 +13,64 @@ function handleReady() {
 }
 
 function getInputs(){ 
-    // let roundGuesses = [];
+  
     let andyIn = $("#andy-in").val();
     let brandonIn = $("#brandon-in").val();
     let colinIn = $("#colin-in").val();
     let koffiIn = $("#koffi-in").val();
   if (andyIn && brandonIn && colinIn && koffiIn)  {
-    let obj = [{
-      name: 'andy',
-      number: Number(andyIn),
-      result: '',
-    },
-    {
-      name: 'brandon',
-      number: Number(brandonIn),
-      result: '',
-    },
-    {
-      name: 'colin',
-      number: Number(colinIn),
-      result: '',
-    },
-    {
-      name: 'koffi',
-      number: Number(koffiIn),
-      result: '',
-    }];
+    $.ajax({
+      method: 'POST',
+      url: '/guesses',
+      data: {
+        guessesToAdd: {
+          name: 'andy',
+          number: Number(andyIn),
+          result: ''
+        },
+        guessesToAdd: {
+          name: 'brandon',
+          number: Number(brandonIn),
+          result: ''
+        },
+        guessesToAdd: {
+          name: 'colin',
+          number: Number(colinIn),
+          result: ''
+        },
+        guessesToAdd: {
+          name: 'koffi',
+          number: Number(koffiIn),
+          result: ''
+        }
+      }
+    }).then(function(response){
+
+    })
+    // let obj = [{
+    //   name: 'andy',
+    //   number: Number(andyIn),
+    //   result: '',
+    // },
+    // {
+    //   name: 'brandon',
+    //   number: Number(brandonIn),
+    //   result: '',
+    // },
+    // {
+    //   name: 'colin',
+    //   number: Number(colinIn),
+    //   result: '',
+    // },
+    // {
+    //   name: 'koffi',
+    //   number: Number(koffiIn),
+    //   result: '',
+    // }];
     counter ++
     allGuesses.push(obj);
     checkGuesses(obj);
-    // roundGuesses.push(obj);
+   
    
     
   } else {
