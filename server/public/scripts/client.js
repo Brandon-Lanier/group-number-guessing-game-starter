@@ -1,6 +1,7 @@
 $(document).ready(handleReady);
 
 let allGuesses = [];
+let counter = 0;
 const randomNumber = Math.floor(Math.random() * ( 26 - 1 ) + 1); 
 console.log('random num =', randomNumber);
 
@@ -37,15 +38,16 @@ function getInputs(){
       number: Number(koffiIn),
       result: '',
     }];
+    counter ++
     allGuesses.push(obj);
     checkGuesses(obj);
     // roundGuesses.push(obj);
    
-    // counter ++
+    
   } else {
     alert('All inputs required');
   }
-  
+  $('.inputs').val('');
 }
 
 function checkGuesses(arr) {
@@ -72,14 +74,15 @@ function checkGuesses(arr) {
   function renderGuesses(){
     console.log('HELOOOOOOOO');
     console.log(allGuesses);
-    $('#us-container').empty()
-    
+    $('.outDivs').empty();
     for (let i = 0; i < allGuesses.length; i++){
       console.log(allGuesses[i].name);
       for (let j = 0; j < allGuesses[i].length; j++){
         console.log(allGuesses[i][j].name);
-        $('#us-container').append(`<p>${allGuesses[i][j].name}, ${allGuesses[i][j].number}, ${allGuesses[i][j].result}</p>`);
+        $(`#${allGuesses[i][j].name}`).append(`<p>Number: ${allGuesses[i][j].number}, Result: ${allGuesses[i][j].result}</p>`);
 
       }
-  }
+      $('#counter-number').empty();
+  } $('#counter-number').append(counter);
 }
+
