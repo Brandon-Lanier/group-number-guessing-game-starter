@@ -1,3 +1,3 @@
-let allGuesses = [];
+// let allGuesses = [];
 
-module.exports = allGuesses;
+// module.exports = allGuesses;

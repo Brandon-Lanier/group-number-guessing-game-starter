@@ -5,9 +5,10 @@ let counter = 0;
 
 function handleReady() {
   console.log("jquery is loaded!");
+  getGuesses();
   $('#submit-button').on('click', getInputs);
   // $('#steve').on('click', '#party-time', log);
-  getGuesses();
+  
 }
 
 function getGuesses(){
@@ -15,8 +16,9 @@ function getGuesses(){
     method: 'GET',
     url: '/guesses'
   }).then(function(response){
-    console.log('we did it', response);
-    // renderGuesses(response);
+    renderGuesses(response);
+    console.log(response);
+    
   })
 }
 
@@ -54,7 +56,7 @@ function getInputs(){
       ]}
       }).then(function(response){
       console.log('response is', response);
-      
+      getGuesses();
     })
   }
 }
@@ -111,20 +113,21 @@ function getInputs(){
 //     renderGuesses()
 //   }
 
-//   function renderGuesses(){
-//     console.log('HELOOOOOOOO');
-//     console.log(allGuesses);
-//     $('.outDivs').empty();
-//     for (let i = 0; i < allGuesses.length; i++){
-//       console.log(allGuesses[i].name);
-//       for (let j = 0; j < allGuesses[i].length; j++){
-//         console.log(allGuesses[i][j].name);
-//         $(`#${allGuesses[i][j].name}`).append(`<p>Number: ${allGuesses[i][j].number}, Result: ${allGuesses[i][j].result}</p>`);
-//         winner(allGuesses[i][j]);
-//       }
-//       $('#counter-number').empty();
-//   } $('#counter-number').append(counter);
-// }
+  function renderGuesses(arr){
+    // console.log('HELOOOOOOOO');
+    // console.log(allGuesses);
+    $('.outDivs').empty();
+    for (let i = 0; i < arr.length; i++){
+      console.log(arr[i].name);
+      for (let j = 0; j < arr[i].length; j++){
+        console.log(arr[i][j].name);
+        $(`#${arr[i][j].name}`).append(`<p>Number: ${arr[i][j].number}, Result: ${arr[i][j].result}</p>`);
+        // winner(arr[i][j]);
+      }
+      // $('#counter-number').empty();
+  } 
+  // $('#counter-number').append(counter);
+}
 
 // function winner(guess) {
 //   // confirm('You Have A Winner!  Play Again??')

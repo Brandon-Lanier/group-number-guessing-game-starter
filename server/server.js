@@ -3,7 +3,8 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5000;
 const randomNumber = Math.floor(Math.random() * ( 26 - 1 ) + 1); 
-let allGuesses = require('./modules/guesses')
+let guesses = []; //require('./modules/guesses')
+// module.exports = guesses;
 
 // This must be added before GET & POST routes.
 app.use(bodyParser.urlencoded({extended:true}))
@@ -12,15 +13,24 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static('server/public'));
 
 // GET & POST Routes go here
+
+app.post('/guesses', function (req, res) {
+  let round = req.body.guessesToAdd;
+  guesses.push(round);
+  console.log(guesses);
+  
+  res.sendStatus(201)
+})
+
+
 app.get('/guesses', function(req, res){
-  res.send(allGuesses)
+  console.log('this is our get request', req.body);
+  
+  res.send(guesses)
   
 })
 
-app.post('/guesses', function (req, res){
-  let round = req.body.guessesToAdd;
-  allGuesses.push(round);
-})
+
 
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
