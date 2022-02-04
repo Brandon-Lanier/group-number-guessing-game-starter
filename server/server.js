@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5000;
 const randomNumber = Math.floor(Math.random() * ( 26 - 1 ) + 1); 
+console.log(randomNumber);
 let guesses = []; //require('./modules/guesses')
 // module.exports = guesses;
 
@@ -16,9 +17,24 @@ app.use(express.static('server/public'));
 
 app.post('/guesses', function (req, res) {
   let round = req.body.guessesToAdd;
+  for (let guess of round){
+    if (guess.number == randomNumber){
+      // winner();
+      guess.result = 'Winnerrrrrr!';
+      console.log(guess.result);
+      
+    } else if (guess.number > randomNumber) {
+      // console.log('toomuuuuch') ;
+      guess.result = 'Too much!';
+      console.log(guess.result);
+    } else {
+      // console.log('Not enough');
+      guess.result = 'Too Low!';
+      console.log(guess.result);
+    }
+    }
   guesses.push(round);
   console.log(guesses);
-  
   res.sendStatus(201)
 })
 

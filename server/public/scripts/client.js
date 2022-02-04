@@ -28,6 +28,9 @@ function getInputs(){
     let brandonIn = $("#brandon-in").val();
     let colinIn = $("#colin-in").val();
     let koffiIn = $("#koffi-in").val();
+    counter++;
+    $('#counter-number').empty();
+    $('#counter-number').append(counter);
   if (andyIn && brandonIn && colinIn && koffiIn)  {
     $.ajax({
       method: 'POST',
@@ -58,7 +61,7 @@ function getInputs(){
       console.log('response is', response);
       getGuesses();
     })
-  }
+  }$('.inputs').val('');
 }
     // let obj = [{
     //   name: 'andy',
@@ -116,30 +119,31 @@ function getInputs(){
   function renderGuesses(arr){
     // console.log('HELOOOOOOOO');
     // console.log(allGuesses);
+    
     $('.outDivs').empty();
     for (let i = 0; i < arr.length; i++){
       console.log(arr[i].name);
       for (let j = 0; j < arr[i].length; j++){
         console.log(arr[i][j].name);
         $(`#${arr[i][j].name}`).append(`<p>Number: ${arr[i][j].number}, Result: ${arr[i][j].result}</p>`);
-        // winner(arr[i][j]);
+       
+        winner(arr[i][j]);
       }
-      // $('#counter-number').empty();
+      
   } 
-  // $('#counter-number').append(counter);
+ 
 }
 
-// function winner(guess) {
-//   // confirm('You Have A Winner!  Play Again??')
-//   // console.log('this si the guess', guess);
-//   if(guess.result === 'Winnerrrrrr!'){
-//     $('#steve').append('<img src="https://cdn.mos.cms.futurecdn.net/FJgmXmkJyXrbEwgCwfjcaa.jpg">')
-//     $('#steve').append('<button id="party-time">New Game?</button>')
+function winner(guess) {
+  // confirm('You Have A Winner!  Play Again??')
+  console.log('this si the guess', guess);
+  if(guess.result === 'Winnerrrrrr!'){
+    $('#steve').append('<img src="https://cdn.mos.cms.futurecdn.net/FJgmXmkJyXrbEwgCwfjcaa.jpg">')
+    $('#steve').append('<button id="party-time">New Game?</button>')
     
-//   }
+  }
   //show who won
   //play again?
   //reload the page
 
-
-// }
+}
